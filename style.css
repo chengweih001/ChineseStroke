@@ -1,0 +1,336 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.input-section {
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-section label {
+    margin-right: 10px;
+}
+
+.input-section input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 200px;
+}
+
+.input-section button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.input-section button:hover {
+    background-color: #0056b3;
+}
+
+/* --- New Layout Styles --- */
+
+#output-section.horizontal-layout {
+    margin-top: 20px;
+    display: flex; /* Arrange columns horizontally */
+    flex-direction: row-reverse; /* Arrange columns right-to-left */
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 0; /* Remove gap, borders will handle spacing */
+    justify-content: flex-start; /* Align columns to the start */
+    align-items: stretch; /* Stretch columns vertically if needed */
+    border: 1px solid #aaa; /* Add outer border */
+    background-color: #fff; /* White background for the table area */
+}
+
+/* Style for each character column */
+.char-column {
+    display: flex;
+    flex-direction: column; /* Stack header, strokes, grids vertically */
+    align-items: center; /* Center items horizontally */
+    border-right: 1px solid #aaa; /* Vertical separator */
+    flex: 0 0 auto; /* Don't grow or shrink, base width on content */
+    min-height: 100px; /* Ensure minimum height */
+}
+
+.char-column:last-child {
+    border-right: none; /* No border on the last column */
+}
+
+/* Header section containing the large character display */
+.char-header {
+    width: 110px; /* Fixed width for header */
+    height: 110px; /* Fixed height for header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #aaa; /* Separator below header */
+}
+
+/* The grid box for the main character display */
+.char-display-grid {
+    width: 100px; /* Match JS HanziWriter size */
+    height: 100px; /* Match JS HanziWriter size */
+    border: 1px solid #ccc; /* Border for the display grid */
+    position: relative; /* For potential pseudo-elements if needed */
+    /* Add grid lines like practice grids */
+    background-image:
+        linear-gradient(to right, #eee 1px, transparent 1px), /* Vertical line */
+        linear-gradient(to bottom, #eee 1px, transparent 1px); /* Horizontal line */
+    background-size: 50% 100%, 100% 50%;
+    background-repeat: no-repeat;
+    background-position: center center, center center;
+}
+
+/* Container for the vertical stroke sequence SVGs */
+.stroke-sequence-container {
+    display: flex;
+    flex-direction: column; /* Stack SVGs vertically */
+    align-items: center; /* Center them horizontally */
+    padding: 10px 0; /* Padding top/bottom */
+    border-bottom: 1px solid #aaa; /* Separator below strokes */
+    width: 110px; /* Match header width */
+    min-height: 100px; /* Ensure some min height */
+}
+
+/* Individual SVG for each stroke step */
+.stroke-step-svg {
+    border: 1px solid #eee;
+    margin-bottom: 3px; /* Space between stroke steps */
+    width: 30px; /* Match JS size */
+    height: 30px; /* Match JS size */
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: small;
+    padding: 10px;
+}
+
+/* Container for the practice grids */
+.practice-grid-container {
+    display: flex;
+    flex-direction: column; /* Stack grids vertically */
+    align-items: center; /* Center grids horizontally */
+    gap: 5px; /* Space between grids */
+    padding: 10px 0; /* Padding top/bottom */
+    width: 110px; /* Match header width */
+}
+
+/* Individual practice grid */
+.practice-grid {
+    width: 50px; /* Size for practice grids */
+    height: 50px; /* Size for practice grids */
+    border: 1px solid #ccc;
+    background-color: #fff;
+    position: relative;
+    /* Tian Zi Ge grid lines */
+    background-image:
+        linear-gradient(to right, #fcc 1px, transparent 1px), /* Vertical center dashed */
+        linear-gradient(to bottom, #fcc 1px, transparent 1px); /* Horizontal center dashed */
+    background-size: 100% 100%, 100% 100%; /* Cover the whole area */
+    background-repeat: no-repeat, no-repeat;
+    background-position: center center, center center;
+}
+/* Add dashed lines using pseudo-elements */
+.practice-grid::before,
+.practice-grid::after {
+    content: '';
+    position: absolute;
+    background-color: #fcc; /* Light red for dashed lines */
+}
+.practice-grid::before { /* Vertical dashed line */
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    border-left: 1px dashed #fcc; /* Use border for dashed effect */
+    background-color: transparent; /* Hide solid line */
+}
+.practice-grid::after { /* Horizontal dashed line */
+    height: 1px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    border-top: 1px dashed #fcc; /* Use border for dashed effect */
+    background-color: transparent; /* Hide solid line */
+}
+
+
+/* --- Control Section Styles (Adjusted) --- */
+.controls-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #f8f9fa; /* Lighter background */
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6; /* Light border */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */ /* Optional: remove shadow */
+}
+
+.input-section {
+    margin-bottom: 0;
+    box-shadow: none;
+    padding: 0;
+    background-color: transparent;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.print-button {
+    padding: 8px 15px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.print-button:hover {
+    background-color: #5a6268;
+}
+
+
+/* --- Updated Print Styles --- */
+@media print {
+    body {
+        margin: 1cm; /* Add some margin for printing */
+        background-color: #fff;
+        font-size: 10pt;
+        color: #000; /* Ensure text is black */
+    }
+
+    h1, .controls-section {
+        display: none; /* Hide title and controls */
+    }
+
+    #output-section.horizontal-layout {
+        margin-top: 0;
+        border: 1px solid #000; /* Use black border for print */
+        gap: 0;
+        display: flex; /* Ensure flex layout is applied */
+        flex-wrap: wrap; /* Allow wrapping */
+        width: 100%; /* Use full printable width */
+    }
+
+    .char-column {
+        border-right: 1px solid #000; /* Black separator */
+        padding: 0; /* Remove padding, rely on inner element spacing */
+        page-break-inside: avoid; /* Try to keep columns intact */
+        flex: 0 0 auto; /* Maintain width */
+        box-shadow: none;
+        background-color: #fff; /* Ensure white background */
+    }
+     .char-column:last-child {
+        border-right: none;
+    }
+
+    .char-header {
+        border-bottom: 1px solid #000; /* Black separator */
+        height: 105px; /* Adjust slightly if needed */
+        width: 105px; /* Adjust slightly if needed */
+    }
+
+    .char-display-grid {
+        border: 1px solid #666; /* Darker grid border */
+        width: 90px; /* Adjust size for print */
+        height: 90px; /* Adjust size for print */
+        /* Ensure grid lines print */
+        background-image:
+            linear-gradient(to right, #aaa 1px, transparent 1px), /* Vertical line */
+            linear-gradient(to bottom, #aaa 1px, transparent 1px); /* Horizontal line */
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+    /* Ensure HanziWriter character prints */
+     .char-display-grid svg path {
+        fill: #000 !important;
+        stroke: #000 !important;
+     }
+
+
+    .stroke-sequence-container {
+        border-bottom: 1px solid #000; /* Black separator */
+        padding: 5px 0;
+        width: 105px; /* Match adjusted header width */
+    }
+
+    .stroke-step-svg {
+        border: 1px solid #666; /* Darker border */
+        margin-bottom: 2px;
+        width: 25px; /* Adjust size */
+        height: 25px; /* Adjust size */
+    }
+    .stroke-step-svg path {
+        fill: #000 !important; /* Ensure strokes print black */
+    }
+
+    .practice-grid-container {
+        padding: 5px 0;
+        gap: 3px;
+        width: 105px; /* Match adjusted header width */
+    }
+
+    .practice-grid {
+        width: 45px; /* Adjust size */
+        height: 45px; /* Adjust size */
+        border: 1px solid #000; /* Black border */
+        background-color: #fff; /* Ensure white background */
+        /* Ensure Tian Zi Ge lines print */
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+    .practice-grid::before,
+    .practice-grid::after {
+        background-color: #aaa; /* Use gray for printed grid lines */
+        border-color: #aaa; /* Use gray for printed grid lines */
+    }
+    .practice-grid::before { border-left-style: solid; } /* Use solid lines for print */
+    .practice-grid::after { border-top-style: solid; } /* Use solid lines for print */
+
+    /* --- Pagination Control --- */
+    .char-column:nth-child(5n) {
+        page-break-after: always; /* Force page break after every 5th column */
+    }
+    /* Adjust border for right-to-left layout in print */
+     .char-column {
+        border-right: none; /* Remove right border */
+        border-left: 1px solid #000; /* Add left border instead */
+     }
+     .char-column:first-child { /* First column in the flex order (rightmost visually) */
+        border-left: none; /* No border on the very first column */
+     }
+
+
+    /* General print adjustments */
+    .practice-grid::after { border-top-style: solid; } /* Use solid lines for print */
+
+
+    /* General print adjustments */
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    svg {
+        shape-rendering: crispEdges; /* Ensure crisp SVG rendering */
+    }
+}

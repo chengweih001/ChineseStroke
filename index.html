@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Stroke Order Practice</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+</head>
+<body>
+    <h1>Chinese Stroke Order Practice</h1>
+
+    <div class="controls-section">
+        <div class="input-section">
+            <label for="charInput">Enter Traditional Chinese Characters:</label>
+            <input type="text" id="charInput" placeholder="e.g., 你好嗎">
+            <button id="submitBtn">Show Strokes</button>
+        </div>
+        <button id="printBtn" class="print-button">Print</button>
+    </div>
+    <div id="output-section" class="printable-area">
+        <!-- Stroke order and practice grids will be displayed here -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
